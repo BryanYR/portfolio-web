@@ -1,53 +1,5 @@
 <script setup lang="ts">
-const projects = [
-  {
-    title: 'Joinnus — Rediseño & Cashless',
-    description: 'Rediseño de la plataforma principal de eventos de LATAM. Desarrollo del sistema "Cashless" y "Cashless-BoxOffice" para manejo de puntos y wallet virtual. Integración de landings para Alianza Lima.',
-    tags: ['Nuxt 3', 'Vue 3', 'Tailwind', 'MySQL'],
-    links: { live: 'https://joinnus.com', github: null },
-    badge: 'Work',
-  },
-  {
-    title: 'LIVE2TRADING — Sistema de Streaming',
-    description: 'Diseño y desarrollo completo de un sistema de streaming del rubro bursátil con landing page para captación de clientes.',
-    tags: ['Vue', 'Node.js', 'MySQL', 'GIT'],
-    links: { live: null, github: null },
-    badge: 'Work',
-  },
-  {
-    title: 'Ingeniust — Sistema de Ferias & Evaluaciones',
-    description: 'Sistema de ferias agropecuarias para Costa Rica y sistema de evaluaciones para estudiantes en modalidad de aula virtual.',
-    tags: ['Next.js', 'Prisma ORM', 'MySQL', 'GIT'],
-    links: { live: null, github: null },
-    badge: 'Work',
-  },
-  {
-    title: 'Bullbet — Arbitraje Deportivo',
-    description: 'Refactorización del sistema web de arbitraje deportivo, sistema administrativo y página web de la academia CCA.',
-    tags: ['React', 'MySQL', 'GIT'],
-    links: { live: null, github: null },
-    badge: 'Work',
-  },
-  {
-    title: 'World System — Sistemas Sectoriales',
-    description: 'Desarrollo de sistemas web en rubros de minería, contabilidad, automotriz, bolsa de trabajo y seguridad para múltiples clientes.',
-    tags: ['Vue', 'Node.js', 'Prisma', 'MySQL'],
-    links: { live: null, github: null },
-    badge: 'Work',
-  },
-  {
-    title: 'Portfolio Personal',
-    description: 'Este portfolio. Construido con Nuxt 3, Tailwind CSS, modo oscuro/claro/sistema y diseño totalmente responsive.',
-    tags: ['Nuxt 3', 'Tailwind', 'SSG'],
-    links: { live: '#', github: 'https://github.com/bjyepez15' },
-    badge: 'Personal',
-  },
-]
-
-const badgeColors: Record<string, string> = {
-  Work: 'bg-blue-500/10 text-blue-500 border-blue-500/20',
-  Personal: 'bg-purple-500/10 text-purple-500 border-purple-500/20',
-}
+import { PROJECTS, PROJECT_BADGE_COLORS } from '~/constants/projects'
 </script>
 
 <template>
@@ -57,7 +9,7 @@ const badgeColors: Record<string, string> = {
 
       <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
         <article
-          v-for="project in projects"
+          v-for="project in PROJECTS"
           :key="project.title"
           class="rounded-2xl p-6 group transition-all duration-300 hover:-translate-y-1 flex flex-col
             dark:bg-white/[0.03] bg-white dark:border dark:border-white/[0.06] border border-zinc-200
@@ -70,7 +22,7 @@ const badgeColors: Record<string, string> = {
               </svg>
             </div>
             <div class="flex items-center gap-1.5">
-              <span class="text-xs px-2 py-0.5 rounded-full border" :class="badgeColors[project.badge]">
+              <span class="text-xs px-2 py-0.5 rounded-full border" :class="PROJECT_BADGE_COLORS[project.badge]">
                 {{ project.badge }}
               </span>
               <a v-if="project.links.github" :href="project.links.github" target="_blank" class="dark:text-zinc-500 text-zinc-400 dark:hover:text-zinc-200 hover:text-zinc-700 transition-colors">
