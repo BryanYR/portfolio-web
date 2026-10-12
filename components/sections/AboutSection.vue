@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const stats = [
-  { value: '4+', label: 'Años de experiencia' },
-  { value: '7', label: 'Empresas / clientes' },
+  { value: '5+', label: 'Años de experiencia' },
+  { value: '9', label: 'Empresas / clientes' },
   { value: '2021', label: 'Ing. de Sistemas UNT' },
   { value: '∞', label: 'Café consumido' },
 ]
@@ -18,7 +18,7 @@ const stats = [
             Soy <span class="dark:text-zinc-200 text-zinc-900 font-medium">Bryan Jefferson Yepez Remigio</span>,
             Bachiller en Ingeniería de Sistemas por la
             <span class="text-brand-500 dark:text-brand-400">Universidad Nacional de Trujillo</span>.
-            Llevo más de 4 años desarrollando aplicaciones web en entornos reales y exigentes.
+            Llevo más de 5 años desarrollando aplicaciones web en entornos reales y exigentes.
           </p>
           <p>
             Mi stack principal gira en torno a <span class="dark:text-zinc-200 text-zinc-900 font-medium">Vue 3 / Nuxt</span>,

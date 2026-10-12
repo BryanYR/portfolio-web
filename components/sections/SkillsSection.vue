@@ -33,7 +33,8 @@ const categories = [
       { name: 'GIT', level: 88 },
       { name: 'Pinia / Vuex', level: 86 },
       { name: 'REST APIs', level: 85 },
-      { name: 'Testing (unit/e2e)', level: 68 },
+      { name: 'Testing (Vitest)', level: 72 },
+      { name: 'Claude Code / IA aplicada', level: 85 },
     ],
   },
 ]
@@ -42,7 +43,8 @@ const tools = [
   'Vue 3', 'Nuxt 3', 'React', 'Next.js', 'TypeScript', 'JavaScript',
   'Tailwind CSS', 'HTML', 'CSS/SCSS', 'Pinia', 'Node.js', 'NestJS',
   'Prisma ORM', 'MySQL', 'GIT', 'Figma', 'WordPress', 'C#',
-  'REST APIs', 'Vite', 'SSR/SSG',
+  'REST APIs', 'Vite', 'SSR/SSG', 'Vitest', 'Jira',
+  'Claude Code', 'MCP',
 ]
 </script>
 

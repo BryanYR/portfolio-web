@@ -51,7 +51,7 @@ function typeLoop() {
         </h2>
 
         <p class="dark:text-zinc-400 text-zinc-600 text-lg leading-relaxed max-w-xl mb-10 animate-fade-up" style="animation-delay:0.4s;opacity:0">
-          Ingeniero de Sistemas con 4+ años construyendo aplicaciones web modernas.
+          Ingeniero de Sistemas con 5+ años construyendo aplicaciones web modernas.
           Especializado en <span class="dark:text-zinc-200 text-zinc-800 font-medium">Vue / Nuxt</span>,
           apasionado por la performance, la accesibilidad y el buen código.
         </p>
