@@ -1,13 +1,13 @@
 <script setup lang="ts">
-defineProps<{ label: string; title: string }>()
+defineProps<{ kicker: string; title: string; aside?: string }>()
 </script>
 
 <template>
-  <div>
-    <p class="font-mono text-brand-500 dark:text-brand-400 text-sm mb-3">{{ label }}</p>
-    <div class="flex items-center gap-4">
-      <h2 class="text-3xl md:text-4xl font-bold dark:text-zinc-100 text-zinc-900 tracking-tight">{{ title }}</h2>
-      <div class="flex-1 h-px bg-gradient-to-r dark:from-zinc-700 from-zinc-300 to-transparent max-w-xs hidden md:block" />
+  <div class="flex items-end justify-between gap-6 border-b-2 border-ink pb-4">
+    <div>
+      <p class="kicker text-stamp">{{ kicker }}</p>
+      <h2 class="mt-3 font-display text-6xl font-extrabold uppercase leading-[0.85] md:text-8xl">{{ title }}</h2>
     </div>
+    <p v-if="aside" class="kicker hidden pb-2 text-muted sm:block">{{ aside }}</p>
   </div>
 </template>

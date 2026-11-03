@@ -1,12 +1,14 @@
+<script setup lang="ts">
+const c = useContent()
+const year = new Date().getFullYear()
+</script>
+
 <template>
-  <footer class="border-t dark:border-white/[0.06] border-zinc-200 py-8 mt-32">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-      <span class="font-mono dark:text-zinc-500 text-zinc-400 text-sm">
-        &lt;bryan /&gt; — 2025
-      </span>
-      <span class="dark:text-zinc-600 text-zinc-400 text-xs">
-        Construido con Nuxt 3 + Tailwind CSS
-      </span>
+  <footer class="wrap">
+    <div class="flex flex-col gap-3 border-t border-ink/15 py-8 text-muted sm:flex-row sm:items-center sm:justify-between">
+      <span class="kicker">© {{ year }} Bryan Yepez</span>
+      <span class="kicker">{{ c.footer.made }}</span>
+      <a href="#top" class="kicker transition-colors hover:text-ink">{{ c.footer.top }}</a>
     </div>
   </footer>
 </template>

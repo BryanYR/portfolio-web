@@ -1,59 +1,137 @@
 <script setup lang="ts">
-import { PROJECTS, PROJECT_BADGE_COLORS } from '~/constants/projects'
+import type { Badge } from '~/constants/content'
+
+const c = useContent()
+
+const badgeClass: Record<Badge, string> = {
+  work: 'border-ink/40 text-ink',
+  freelance: 'border-olive text-olive',
+  ai: 'border-stamp text-stamp',
+}
+
+const host = (url: string) => new URL(url).hostname.replace(/^www\./, '')
 </script>
 
 <template>
-  <section id="projects" class="py-32">
-    <div class="max-w-6xl mx-auto px-6">
-      <SectionHeading label="03. Proyectos" title="Lo que he construido" />
+  <section id="proyectos" class="wrap py-24 md:py-32">
+    <SectionHeading :kicker="c.projects.kicker" :title="c.projects.title" :aside="c.projects.aside" />
 
-      <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-        <article
-          v-for="project in PROJECTS"
-          :key="project.title"
-          class="rounded-2xl p-6 group transition-all duration-300 hover:-translate-y-1 flex flex-col
-            dark:bg-white/[0.03] bg-white dark:border dark:border-white/[0.06] border border-zinc-200
-            hover:border-brand-500/30 dark:hover:border-brand-500/20 hover:shadow-lg dark:hover:shadow-brand-500/5 hover:shadow-brand-500/10 shadow-sm dark:shadow-none"
-        >
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-9 h-9 rounded-xl bg-brand-500/10 border border-brand-500/20 flex items-center justify-center flex-shrink-0">
-              <svg class="w-4 h-4 text-brand-500 dark:text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-              </svg>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-xs px-2 py-0.5 rounded-full border" :class="PROJECT_BADGE_COLORS[project.badge]">
-                {{ project.badge }}
-              </span>
-              <a v-if="project.links.github" :href="project.links.github" target="_blank" class="dark:text-zinc-500 text-zinc-400 dark:hover:text-zinc-200 hover:text-zinc-700 transition-colors">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
-                </svg>
-              </a>
-              <a v-if="project.links.live && project.links.live !== '#'" :href="project.links.live" target="_blank" class="dark:text-zinc-500 text-zinc-400 dark:hover:text-zinc-200 hover:text-zinc-700 transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            </div>
-          </div>
+    <ol>
+      <li
+        v-for="(project, i) in c.projects.featured"
+        :key="project.name"
+        class="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-x-4 gap-y-8 border-b border-ink/15 py-12 md:grid-cols-[3.5rem_minmax(0,1fr)_minmax(0,1fr)] md:gap-x-10 md:py-16"
+      >
+        <span class="pt-1 font-mono text-sm text-muted">{{ String(i + 1).padStart(2, '0') }}</span>
 
-          <h3 class="dark:text-zinc-100 text-zinc-800 font-semibold mb-2 group-hover:text-brand-500 dark:group-hover:text-brand-300 transition-colors">
-            {{ project.title }}
-          </h3>
-          <p class="dark:text-zinc-500 text-zinc-500 text-sm leading-relaxed flex-1">{{ project.description }}</p>
+        <div>
+          <span class="kicker inline-block border px-1.5 py-0.5 !text-[10px]" :class="badgeClass[project.badge]">
+            {{ c.projects.badges[project.badge] }}
+          </span>
+          <h3 class="mt-3 font-display text-5xl font-extrabold uppercase leading-[0.9] md:text-6xl">{{ project.name }}</h3>
+          <p class="mt-2 font-medium">{{ project.subtitle }}</p>
+          <p class="mt-5 leading-relaxed text-muted">{{ project.summary }}</p>
 
-          <div class="flex flex-wrap gap-1.5 mt-5">
-            <span
-              v-for="tag in project.tags"
-              :key="tag"
-              class="text-xs font-mono px-2 py-0.5 rounded dark:bg-zinc-900 bg-zinc-100 dark:text-zinc-500 text-zinc-500 dark:border dark:border-zinc-800 border border-zinc-200"
+          <ul class="mt-5 space-y-2">
+            <li v-for="h in project.highlights" :key="h" class="flex gap-3 leading-relaxed">
+              <span class="mt-[0.7em] h-px w-3 shrink-0 bg-olive" aria-hidden="true" />
+              {{ h }}
+            </li>
+          </ul>
+
+          <p class="mt-5 font-mono text-xs text-muted">{{ project.tags.join(' · ') }}</p>
+
+          <a
+            v-if="project.live"
+            :href="project.live"
+            target="_blank"
+            rel="noopener"
+            class="kicker group mt-6 inline-flex items-center gap-1.5 text-ink"
+          >
+            {{ c.projects.viewSite }} · {{ host(project.live) }}
+            <span class="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+          </a>
+          <p v-else class="kicker mt-6 text-muted">{{ c.projects.internal }}</p>
+        </div>
+
+        <!-- Media: a printed screenshot, a stats panel or a terminal -->
+        <div class="col-start-2 self-start md:col-start-auto">
+          <component
+            :is="project.live ? 'a' : 'div'"
+            v-if="project.media.type === 'image'"
+            :href="project.live ?? undefined"
+            target="_blank"
+            rel="noopener"
+            tabindex="-1"
+            class="group block [filter:drop-shadow(0_16px_22px_rgb(0_0_0/0.16))]"
+          >
+            <figure class="ticket rotate-[-1deg] p-2.5 pb-3 transition-transform duration-500 group-hover:rotate-0">
+              <div class="aspect-[16/10] overflow-hidden">
+                <img
+                  :src="project.media.src"
+                  :alt="project.media.alt"
+                  width="1280"
+                  height="800"
+                  loading="lazy"
+                  class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
+                >
+              </div>
+              <figcaption v-if="project.live" class="mt-2.5 font-mono text-[10px] uppercase tracking-[0.18em] opacity-60">
+                {{ host(project.live) }}
+              </figcaption>
+            </figure>
+          </component>
+
+          <dl v-else-if="project.media.type === 'stats'" class="grid grid-cols-2 gap-px border border-ink/15 bg-ink/15">
+            <div
+              v-for="(s, si) in project.media.items"
+              :key="s.label"
+              class="flex flex-col-reverse bg-surface p-5"
+              :class="si === 0 ? 'col-span-2' : ''"
             >
-              {{ tag }}
-            </span>
+              <dt class="mt-2 text-sm text-muted">{{ s.label }}</dt>
+              <dd class="font-display font-extrabold leading-none" :class="si === 0 ? 'text-7xl md:text-8xl text-olive' : 'text-5xl'">{{ s.value }}</dd>
+            </div>
+          </dl>
+
+          <div v-else-if="project.media.type === 'terminal'" class="bg-paper-ink p-6 font-mono text-sm leading-relaxed text-paper">
+            <div class="mb-5 flex gap-1.5" aria-hidden="true">
+              <span class="h-2.5 w-2.5 rounded-full bg-paper/25" />
+              <span class="h-2.5 w-2.5 rounded-full bg-paper/25" />
+              <span class="h-2.5 w-2.5 rounded-full bg-paper/25" />
+            </div>
+            <p v-for="line in project.media.lines" :key="line.cmd" class="mb-3">
+              <span class="text-paper/50"># {{ line.comment }}</span><br>
+              <span class="text-[#C9CD8E]">$</span> {{ line.cmd }}
+            </p>
+            <p class="mt-5 text-[#F0704E]">{{ project.media.footer }}</p>
           </div>
-        </article>
-      </div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="mt-16">
+      <p class="kicker text-muted">{{ c.projects.othersTitle }}</p>
+      <ul class="mt-4 border-t border-ink/15">
+        <li v-for="p in c.projects.others" :key="p.name" class="border-b border-ink/15">
+          <a
+            :href="p.live"
+            target="_blank"
+            rel="noopener"
+            class="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)_10rem] md:items-baseline"
+          >
+            <h3 class="font-display text-3xl font-extrabold uppercase leading-none transition-colors group-hover:text-olive">{{ p.name }}</h3>
+            <div>
+              <p class="leading-relaxed text-muted">{{ p.summary }}</p>
+              <p class="mt-2 font-mono text-xs text-muted">{{ p.tags.join(' · ') }}</p>
+            </div>
+            <span class="kicker inline-flex items-center gap-1.5 md:justify-end">
+              {{ host(p.live) }}
+              <span class="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">↗</span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </div>
   </section>
 </template>

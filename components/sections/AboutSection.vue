@@ -1,57 +1,44 @@
 <script setup lang="ts">
-const stats = [
-  { value: '5+', label: 'Años de experiencia' },
-  { value: '9', label: 'Empresas / clientes' },
-  { value: '2021', label: 'Ing. de Sistemas UNT' },
-  { value: '∞', label: 'Café consumido' },
-]
+const c = useContent()
+
+// Billed like a festival poster: the bigger the name, the more often I use it
+const tierSize = ['text-4xl md:text-5xl', 'text-2xl md:text-3xl', 'text-xl']
 </script>
 
 <template>
-  <section id="about" class="py-32">
-    <div class="max-w-6xl mx-auto px-6">
-      <SectionHeading label="01. Sobre mí" title="¿Quién soy?" />
+  <section id="sobre-mi" class="wrap py-24 md:py-32">
+    <SectionHeading :kicker="c.about.kicker" :title="c.about.title" />
 
-      <div class="grid md:grid-cols-2 gap-16 mt-16 items-center">
-        <div class="space-y-5 dark:text-zinc-400 text-zinc-600 leading-relaxed">
-          <p>
-            Soy <span class="dark:text-zinc-200 text-zinc-900 font-medium">Bryan Jefferson Yepez Remigio</span>,
-            Bachiller en Ingeniería de Sistemas por la
-            <span class="text-brand-500 dark:text-brand-400">Universidad Nacional de Trujillo</span>.
-            Llevo más de 5 años desarrollando aplicaciones web en entornos reales y exigentes.
-          </p>
-          <p>
-            Mi stack principal gira en torno a <span class="dark:text-zinc-200 text-zinc-900 font-medium">Vue 3 / Nuxt</span>,
-            aunque también manejo React, Next.js y el lado backend con Node.js y NestJS.
-            He trabajado desde startups hasta plataformas con cientos de miles de usuarios como
-            <span class="dark:text-zinc-200 text-zinc-900">Joinnus</span>.
-          </p>
-          <p>
-            Me importa construir interfaces rápidas, accesibles y con código limpio.
-            También tengo experiencia integrando diseños desde Figma y trabajando con sistemas de diseño propios.
-          </p>
-
-          <div class="grid grid-cols-2 gap-4 pt-4">
-            <div
-              v-for="stat in stats"
-              :key="stat.label"
-              class="glass dark:glass rounded-xl p-4 dark:bg-white/[0.03] bg-zinc-100 dark:border-white/[0.06] border-zinc-200"
-            >
-              <p class="text-2xl font-bold text-brand-500 dark:text-brand-400 font-mono">{{ stat.value }}</p>
-              <p class="text-xs dark:text-zinc-500 text-zinc-500 mt-1">{{ stat.label }}</p>
-            </div>
-          </div>
+    <div class="mt-12 grid gap-16 lg:grid-cols-12 lg:gap-12">
+      <div class="lg:col-span-6">
+        <div class="space-y-6 text-lg leading-relaxed text-ink/80">
+          <p class="text-pretty text-2xl leading-snug text-ink md:text-3xl">{{ c.about.lede }}</p>
+          <p v-for="p in c.about.paragraphs" :key="p">{{ p }}</p>
         </div>
 
-        <div class="flex justify-center md:justify-end">
-          <div class="relative">
-            <div class="w-64 h-64 md:w-72 md:h-72 rounded-2xl bg-gradient-to-br from-brand-500/20 to-teal-400/10 border border-brand-500/20 flex items-center justify-center glow dark:bg-white/[0.03] bg-white">
-              <span class="font-mono text-6xl font-bold text-brand-500/50 dark:text-brand-400/60">B</span>
+        <div class="mt-10 border-t border-ink/15 pt-5">
+          <p class="kicker text-muted">{{ c.about.languagesTitle }}</p>
+          <dl class="mt-3 flex flex-wrap gap-x-10 gap-y-3">
+            <div v-for="l in c.about.languages" :key="l.name">
+              <dt class="font-display text-2xl font-extrabold uppercase leading-none">{{ l.name }}</dt>
+              <dd class="mt-1 text-sm text-muted">{{ l.level }}</dd>
             </div>
-            <div class="absolute -bottom-4 -right-4 dark:bg-white/[0.03] bg-white backdrop-blur-sm rounded-xl px-4 py-2 border dark:border-white/[0.06] border-zinc-200 shadow-sm">
-              <p class="text-xs dark:text-zinc-500 text-zinc-400 font-mono">actualmente en</p>
-              <p class="text-sm dark:text-zinc-200 text-zinc-800 font-medium">@ Joinnus</p>
-            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6">
+        <p class="kicker text-muted">{{ c.about.lineupTitle }}</p>
+        <div class="mt-4 border-t-2 border-ink">
+          <div v-for="(row, ri) in c.about.lineup" :key="row.tier" class="border-b border-dashed border-ink/25 py-6">
+            <p class="kicker mb-3 text-stamp">{{ row.tier }}</p>
+            <p class="font-display font-extrabold uppercase leading-[1.05]" :class="tierSize[ri]">
+              <template v-for="(item, i) in row.items" :key="item">
+                <span class="whitespace-nowrap">{{ item }}</span>
+                <span v-if="i < row.items.length - 1" class="px-2 text-olive" aria-hidden="true">/</span>
+                {{ ' ' }}
+              </template>
+            </p>
           </div>
         </div>
       </div>

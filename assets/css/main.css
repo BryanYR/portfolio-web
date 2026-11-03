@@ -3,45 +3,94 @@
 @tailwind utilities;
 
 @layer base {
+  /* Palette taken from the portrait: grey-warm wall, olive tee, ink, rubber-stamp red */
+  :root {
+    --canvas: 236 231 219;
+    --surface: 228 222 208;
+    --ink: 26 25 20;
+    --muted: 95 91 80;
+    --olive: 79 83 46;
+    --stamp: 185 58 29;
+    color-scheme: light;
+  }
+
+  .dark {
+    --canvas: 21 20 16;
+    --surface: 29 28 22;
+    --ink: 236 231 219;
+    --muted: 163 158 143;
+    --olive: 186 191 132;
+    --stamp: 240 112 78;
+    color-scheme: dark;
+  }
+
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    @apply bg-zinc-50 text-zinc-900 font-sans antialiased transition-colors duration-300;
-  }
-
-  .dark body,
-  html.dark {
-    background-color: theme('colors.zinc.950');
-    color: theme('colors.zinc.100');
-  }
-
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-zinc-100 dark:bg-zinc-900;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-brand-500 rounded-full;
+    @apply bg-canvas text-ink font-sans antialiased transition-colors duration-300;
   }
 
   ::selection {
-    @apply bg-brand-500/20 text-brand-700 dark:text-brand-200;
+    @apply bg-olive text-canvas;
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--stamp));
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-brand-500 to-teal-400 bg-clip-text text-transparent;
+@layer components {
+  .wrap {
+    @apply mx-auto w-full max-w-[1200px] px-5 md:px-8;
   }
 
-  .glass {
-    @apply bg-zinc-100/80 border border-zinc-200 dark:bg-white/[0.03] dark:border-white/[0.06];
+  .ticket {
+    @apply bg-paper text-paper-ink;
   }
 
-  .glow {
-    box-shadow: 0 0 40px -10px theme('colors.brand.500' / 25%);
+  /* Ticket notches: half-circles punched out of the edge where two parts meet */
+  .notch-b {
+    -webkit-mask: radial-gradient(circle 14px at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat;
+    mask: radial-gradient(circle 14px at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat;
+  }
+  .notch-t {
+    -webkit-mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle 14px at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat;
+    mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) left / 51% 100% no-repeat,
+      radial-gradient(circle 14px at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat;
+  }
+  .notch-r {
+    -webkit-mask: radial-gradient(circle 14px at 100% 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    mask: radial-gradient(circle 14px at 100% 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle 14px at 100% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+  }
+  .notch-l {
+    -webkit-mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle 14px at 0 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+    mask: radial-gradient(circle 14px at 0 0, #0000 98%, #000) top / 100% 51% no-repeat,
+      radial-gradient(circle 14px at 0 100%, #0000 98%, #000) bottom / 100% 51% no-repeat;
+  }
+
+  .kicker {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em];
+  }
+
+  .link-underline {
+    @apply underline decoration-ink/30 decoration-1 underline-offset-[5px] transition-colors hover:decoration-stamp;
   }
 }
