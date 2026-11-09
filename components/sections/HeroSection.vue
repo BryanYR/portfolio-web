@@ -50,7 +50,7 @@ const c = useContent()
       </div>
 
       <div class="flex justify-center lg:col-span-5 lg:justify-end lg:pb-4">
-        <HeroTicket />
+        <HeroSheet />
       </div>
     </div>
 

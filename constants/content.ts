@@ -85,18 +85,22 @@ const es = {
       { value: 'UNT', label: 'Egresado de Ing. de Sistemas' },
     ],
   },
-  ticket: {
-    admit: 'Entrada general',
+  sheet: {
+    kicker: 'Hoja de datos',
     role: 'Frontend Developer · Perú',
     stamp: 'Disponible',
-    stage: 'Escenario',
-    mapLabel: 'Mapa de asientos de un evento con el lugar de Bryan resaltado al centro',
-    legend: { sold: 'Vendido', free: 'Libre', yours: 'Bryan' },
-    fields: [
-      { label: 'Sección', value: 'Frontend' },
+    pinoutTitle: 'Diagrama de pines',
+    pinoutLabel: 'Diagrama de un chip cuyos pines son el stack diario de Bryan',
+    pins: STACK.daily,
+    specsTitle: 'Especificaciones',
+    specs: [
+      { label: 'Experiencia', value: '5+ años' },
       { label: 'Nivel', value: 'Semi Senior' },
       { label: 'Modalidad', value: 'Remoto' },
+      { label: 'Zona horaria', value: 'UTC−5 · Lima' },
     ],
+    origin: 'Trujillo, PE',
+    page: 'Hoja 1 de 1',
   },
   projects: {
     kicker: 'Programa',
@@ -340,18 +344,22 @@ const en: SiteContent = {
       { value: 'UNT', label: 'Systems Engineering graduate' },
     ],
   },
-  ticket: {
-    admit: 'General admission',
+  sheet: {
+    kicker: 'Datasheet',
     role: 'Frontend Developer · Peru',
     stamp: 'Available',
-    stage: 'Stage',
-    mapLabel: "Event seating map with Bryan's seat highlighted in the centre",
-    legend: { sold: 'Sold', free: 'Free', yours: 'Bryan' },
-    fields: [
-      { label: 'Section', value: 'Frontend' },
+    pinoutTitle: 'Pinout',
+    pinoutLabel: "Chip diagram whose pins are Bryan's daily stack",
+    pins: STACK.daily,
+    specsTitle: 'Specifications',
+    specs: [
+      { label: 'Experience', value: '5+ years' },
       { label: 'Level', value: 'Mid-level' },
       { label: 'Mode', value: 'Remote' },
+      { label: 'Time zone', value: 'UTC−5 · Lima' },
     ],
+    origin: 'Trujillo, PE',
+    page: 'Sheet 1 of 1',
   },
   projects: {
     kicker: 'Programme',
