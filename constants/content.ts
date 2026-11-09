@@ -89,7 +89,9 @@ const es = {
     admit: 'Entrada general',
     role: 'Frontend Developer · Perú',
     stamp: 'Disponible',
-    photoAlt: 'Retrato de Bryan Yepez',
+    stage: 'Escenario',
+    mapLabel: 'Mapa de asientos de un evento con el lugar de Bryan resaltado al centro',
+    legend: { sold: 'Vendido', free: 'Libre', yours: 'Bryan' },
     fields: [
       { label: 'Sección', value: 'Frontend' },
       { label: 'Nivel', value: 'Semi Senior' },
@@ -342,7 +344,9 @@ const en: SiteContent = {
     admit: 'General admission',
     role: 'Frontend Developer · Peru',
     stamp: 'Available',
-    photoAlt: 'Portrait of Bryan Yepez',
+    stage: 'Stage',
+    mapLabel: "Event seating map with Bryan's seat highlighted in the centre",
+    legend: { sold: 'Sold', free: 'Free', yours: 'Bryan' },
     fields: [
       { label: 'Section', value: 'Frontend' },
       { label: 'Level', value: 'Mid-level' },
