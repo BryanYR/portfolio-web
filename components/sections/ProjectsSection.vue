@@ -32,7 +32,30 @@ const host = (url: string) => new URL(url).hostname.replace(/^www\./, '')
           <p class="mt-2 font-medium">{{ project.subtitle }}</p>
           <p class="mt-5 leading-relaxed text-muted">{{ project.summary }}</p>
 
-          <ul class="mt-5 space-y-2">
+          <!-- Case study ledger: Problema → Qué hice → Resultado (only when the project has them) -->
+          <dl v-if="project.problem || project.result" class="mt-6 border-t border-ink/15">
+            <div v-if="project.problem" class="grid gap-1 border-b border-ink/15 py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-4">
+              <dt class="kicker pt-1 text-muted">{{ c.projects.caseLabels.problem }}</dt>
+              <dd class="leading-relaxed">{{ project.problem }}</dd>
+            </div>
+            <div class="grid gap-1 border-b border-ink/15 py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-4">
+              <dt class="kicker pt-1 text-muted">{{ c.projects.caseLabels.did }}</dt>
+              <dd>
+                <ul class="space-y-2">
+                  <li v-for="h in project.highlights" :key="h" class="flex gap-3 leading-relaxed">
+                    <span class="mt-[0.7em] h-px w-3 shrink-0 bg-olive" aria-hidden="true" />
+                    {{ h }}
+                  </li>
+                </ul>
+              </dd>
+            </div>
+            <div v-if="project.result" class="grid gap-1 border-b border-ink/15 py-4 sm:grid-cols-[7.5rem_minmax(0,1fr)] sm:gap-4">
+              <dt class="kicker pt-1 text-stamp">{{ c.projects.caseLabels.result }}</dt>
+              <dd class="font-medium leading-relaxed">{{ project.result }}</dd>
+            </div>
+          </dl>
+
+          <ul v-else class="mt-5 space-y-2">
             <li v-for="h in project.highlights" :key="h" class="flex gap-3 leading-relaxed">
               <span class="mt-[0.7em] h-px w-3 shrink-0 bg-olive" aria-hidden="true" />
               {{ h }}

@@ -11,6 +11,9 @@ export interface FeaturedProject {
   subtitle: string
   badge: Badge
   summary: string
+  /** Optional case-study framing: shown as Problema → Qué hice (highlights) → Resultado */
+  problem?: string
+  result?: string
   highlights: string[]
   tags: string[]
   live: string | null
@@ -64,6 +67,7 @@ const es = {
       { label: 'Contacto', href: '#contacto' },
     ],
     home: 'Bryan Yepez, inicio',
+    skip: 'Saltar al contenido',
     menu: 'Menú',
     close: 'Cerrar',
     switchTo: { href: '/en', short: 'EN', label: 'Read in English', hreflang: 'en' },
@@ -108,6 +112,7 @@ const es = {
     aside: '4 destacados · 2021 — hoy',
     badges: { work: 'Empresa', freelance: 'Freelance', ai: 'IA' } as Record<Badge, string>,
     viewSite: 'Ver sitio',
+    caseLabels: { problem: 'Problema', did: 'Qué hice', result: 'Resultado' },
     internal: 'Uso interno',
     othersTitle: 'Otros trabajos',
     featured: [
@@ -116,7 +121,9 @@ const es = {
         subtitle: 'Plataforma de eventos y ticketing',
         badge: 'work',
         summary: 'Parte del equipo frontend de la plataforma donde cientos de miles de usuarios compran y gestionan sus entradas.',
+        problem: 'Mantener estable una plataforma con 100k+ usuarios mientras salen funcionalidades nuevas.',
         highlights: [
+          'Resolución diaria de incidencias: rastrear el error, corregirlo y proponer mejoras para que no vuelva.',
           'Participación en los sistemas Cashless y Cashless-BoxOffice: wallet virtual, puntos y compra de productos y servicios.',
           'Paso de Addons del checkout: store, componentes reutilizables, sincronización de productos y manejo de errores.',
           'Rediseño de la plataforma principal integrando diseños de Figma con la librería interna @joinnus/ui.',
@@ -138,7 +145,9 @@ const es = {
         subtitle: 'Sitio corporativo de un estudio jurídico',
         badge: 'freelance',
         summary: 'Sitio de una firma legal de Trujillo con servicios en derecho civil, penal, empresarial, contrataciones públicas y saneamiento de propiedades.',
-        highlights: ['SEO.', 'Integración con WhatsApp y redes sociales.'],
+        problem: 'Tenían una web básica, sin diseño ni identidad.',
+        highlights: ['Diseño y desarrollo del sitio desde cero.', 'SEO técnico.', 'Integración con WhatsApp y redes sociales.'],
+        result: 'Sitio nuevo en producción con SEO 100 y Buenas prácticas 100 en Lighthouse.',
         tags: ['Nuxt', 'Vue 3', 'Tailwind', 'SEO'],
         live: 'https://dcrrabogados.com/',
         media: { type: 'image', src: '/img/projects/dcrr.jpg', alt: 'Página de inicio de dcrrabogados.com' },
@@ -148,7 +157,9 @@ const es = {
         subtitle: 'Landing de un consultorio dental',
         badge: 'freelance',
         summary: 'Consultorio odontológico en Barranco, Lima, especializado en ortodoncia invisible, estética dental y rehabilitación oral.',
-        highlights: ['Reserva de citas por WhatsApp.', 'SEO y diseño responsive.'],
+        problem: 'El consultorio no tenía web propia para mostrar sus servicios.',
+        highlights: ['Landing desde cero.', 'Reserva de citas por WhatsApp.', 'SEO y diseño responsive.'],
+        result: 'Primera web del consultorio, con Accesibilidad 97 y Buenas prácticas 100 en Lighthouse.',
         tags: ['Nuxt', 'Vue 3', 'Tailwind', 'SEO'],
         live: 'https://dradianazuniga.pe/',
         media: { type: 'image', src: '/img/projects/zuniga.jpg', alt: 'Página de inicio de dradianazuniga.pe' },
@@ -158,6 +169,8 @@ const es = {
         subtitle: 'jnns + skills de Claude Code',
         badge: 'ai',
         summary: 'Herramientas para que el equipo de frontend de Joinnus prepare y valide casos de prueba más rápido.',
+        problem: 'Preparar un caso de prueba a mano (tickets, reservas, configuración en el admin) tomaba de 10 a 20 minutos.',
+        result: 'Con jnns el mismo caso queda listo en 2–3 minutos.',
         highlights: [
           'jnns: CLI en Node.js sin dependencias, co-desarrollado con un compañero, que prepara casos de prueba desde la terminal sin pasar por la interfaz.',
           'Skills de Claude Code para validar flujos en el navegador, generar tests unitarios, revisar código y migrar componentes de UI.',
@@ -323,6 +336,7 @@ const en: SiteContent = {
       { label: 'Contact', href: '#contacto' },
     ],
     home: 'Bryan Yepez, home',
+    skip: 'Skip to content',
     menu: 'Menu',
     close: 'Close',
     switchTo: { href: '/', short: 'ES', label: 'Leer en español', hreflang: 'es' },
@@ -367,6 +381,7 @@ const en: SiteContent = {
     aside: '4 featured · 2021 — now',
     badges: { work: 'Company', freelance: 'Freelance', ai: 'AI' },
     viewSite: 'Visit site',
+    caseLabels: { problem: 'Challenge', did: 'What I did', result: 'Outcome' },
     internal: 'Internal tool',
     othersTitle: 'Other work',
     featured: [
@@ -375,7 +390,9 @@ const en: SiteContent = {
         subtitle: 'Events and ticketing platform',
         badge: 'work',
         summary: 'Part of the frontend team behind the platform where hundreds of thousands of users buy and manage their tickets.',
+        problem: 'Keeping a platform with 100k+ users stable while new features keep shipping.',
         highlights: [
+          'Day-to-day issue resolution: tracking bugs down, fixing them and proposing improvements so they don’t come back.',
           'Contributed to the Cashless and Cashless-BoxOffice systems: virtual wallet, points and purchase of products and services.',
           'Checkout Add-ons step: store, reusable components, product synchronization and error handling.',
           'Redesign of the core platform, turning Figma designs into code with the internal @joinnus/ui library.',
@@ -397,7 +414,9 @@ const en: SiteContent = {
         subtitle: 'Corporate website for a law firm',
         badge: 'freelance',
         summary: 'Website for a law firm in Trujillo covering civil, criminal, corporate and public procurement law, and property regularization.',
-        highlights: ['SEO.', 'WhatsApp and social media integration.'],
+        problem: 'They had a basic website with no design or identity.',
+        highlights: ['Designed and built the site from scratch.', 'Technical SEO.', 'WhatsApp and social media integration.'],
+        result: 'New site in production scoring 100 on SEO and 100 on Best Practices in Lighthouse.',
         tags: ['Nuxt', 'Vue 3', 'Tailwind', 'SEO'],
         live: 'https://dcrrabogados.com/',
         media: { type: 'image', src: '/img/projects/dcrr.jpg', alt: 'Home page of dcrrabogados.com' },
@@ -407,7 +426,9 @@ const en: SiteContent = {
         subtitle: 'Landing page for a dental practice',
         badge: 'freelance',
         summary: 'Dental practice in Barranco, Lima, specialized in clear aligners, cosmetic dentistry and oral rehabilitation.',
-        highlights: ['Appointment booking through WhatsApp.', 'SEO and responsive design.'],
+        problem: 'The practice had no website of its own to present its services.',
+        highlights: ['Landing page built from scratch.', 'Appointment booking through WhatsApp.', 'SEO and responsive design.'],
+        result: 'The practice’s first website, scoring 97 on Accessibility and 100 on Best Practices in Lighthouse.',
         tags: ['Nuxt', 'Vue 3', 'Tailwind', 'SEO'],
         live: 'https://dradianazuniga.pe/',
         media: { type: 'image', src: '/img/projects/zuniga.jpg', alt: 'Home page of dradianazuniga.pe' },
@@ -417,6 +438,8 @@ const en: SiteContent = {
         subtitle: 'jnns + Claude Code skills',
         badge: 'ai',
         summary: 'Tools that help the Joinnus frontend team set up and validate test cases faster.',
+        problem: 'Setting up a test case by hand (tickets, bookings, admin configuration) took 10 to 20 minutes.',
+        result: 'With jnns the same case is ready in 2–3 minutes.',
         highlights: [
           'jnns: a zero-dependency Node.js CLI, co-developed with a teammate, that sets up test cases from the terminal without going through the UI.',
           'Claude Code skills to validate flows in the browser, generate unit tests, review code and migrate UI components.',
